@@ -44,14 +44,6 @@ class CategoryAdapter(
                 )
             }
         }
-//        val item = listCategory
-//        context?.let {
-//            holder.itemView.tvCategory.text = listCategory?.get(position)
-//            holder.itemView.setOnClickListener {
-//                item?.get(position)?.let { it1 -> mListener(it1) }
-//            }
-//
-//        }
     }
 
     override fun getItemCount(): Int {
@@ -63,19 +55,8 @@ class CategoryAdapter(
             dataCategories: String,
             listener: (String) -> Unit
         ) {
-//            for (i in 0 until dataCategories!!) {
-            //Append all the values to a string
             itemView.tvCategory.text = dataCategories
-//            }
             val category: String = itemView.tvCategory.text as String
-//            itemView.setOnClickListener {
-//                val intent = Intent("send-category")
-//                intent.putExtra("category", category)
-////                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK;
-////                LocalBroadcastManager.getInstance(it.context).sendBroadcast(intent)
-//                it.context.startActivity(Intent(it.context, RandomCategoryActivity::class.java))
-//            }
-
             itemView.setOnClickListener {
                 listener(category)
             }

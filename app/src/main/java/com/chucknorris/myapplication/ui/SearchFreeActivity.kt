@@ -49,7 +49,7 @@ class SearchFreeActivity : AppCompatActivity(), (String) -> Unit {
             actionBar.title = "Search by " +intent.getStringExtra("query")
         }
 
-        categoryAdapter = RandomCategoryAdapter(dataListCategories, applicationContext)
+        categoryAdapter = RandomCategoryAdapter(dataListCategories, applicationContext, this)
         linearLayoutManager = LinearLayoutManager(applicationContext)
         rvCategory.layoutManager = linearLayoutManager
         rvCategory.hasFixedSize()
@@ -109,8 +109,8 @@ class SearchFreeActivity : AppCompatActivity(), (String) -> Unit {
     }
 
     override fun invoke(p1: String) {
-        Log.d(TAG, "invoke: $p1")
-        val intentDetail = Intent(applicationContext, RandomCategoryActivity::class.java)
+        Log.d(TAG, "invokesssss: $p1")
+        val intentDetail = Intent(applicationContext, CategoryDetail::class.java)
         intentDetail.putExtra(getString(R.string.randomCategory), p1)
         startActivity(intentDetail)
     }

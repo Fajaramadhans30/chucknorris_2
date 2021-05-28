@@ -1,6 +1,7 @@
 package com.chucknorris.myapplication.ui
 
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -35,10 +36,20 @@ class CategoryActivity :AppCompatActivity(), (String) -> Unit {
 
     private lateinit var querys: String
 
+    private fun isNetworkConnected(): Boolean {
+        val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
-        idError.visibility = View.GONE
+
+        if (isNetworkConnected()) {
+            idError.visibility = View.GONE
+        } else {
+            idError.visibility = View.VISIBLE
+        }
         idLoading.visibility = View.VISIBLE
 
         val actionBar: ActionBar? = supportActionBar
@@ -110,7 +121,7 @@ class CategoryActivity :AppCompatActivity(), (String) -> Unit {
 
     override fun invoke(p1: String) {
         Log.d(TAG, "invoke: $p1")
-        val intentDetail = Intent(applicationContext, RandomCategoryActivity::class.java)
+        val intentDetail = Intent(applicationContext, CategoryDetail::class.java)
         intentDetail.putExtra(getString(R.string.randomCategory), p1)
         startActivity(intentDetail)
     }

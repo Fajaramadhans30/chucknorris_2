@@ -2,6 +2,7 @@ package com.chucknorris.myapplication.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -24,17 +25,23 @@ import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_detail_category.*
 import kotlinx.android.synthetic.main.failed_load_layout.*
 import kotlinx.android.synthetic.main.item_random_category.ivPicture
+import kotlinx.android.synthetic.main.no_data_layout.*
 import kotlinx.android.synthetic.main.progress_loading.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class RandomCategoryActivity : AppCompatActivity() {
+class CategoryDetail : AppCompatActivity() {
     private val TAG = "RandomCategoryActivity"
     private lateinit var randomCategoryViewModel: RandomCategoryViewModel
     private val compositeDisposable = CompositeDisposable()
     private val repository = JokesProvider.jokesProviderRepository()
+
+    private fun isNetworkConnected(): Boolean {
+        val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +51,12 @@ class RandomCategoryActivity : AppCompatActivity() {
         if (actionBar != null) {
             actionBar.title = "Detail Category"
         }
-        idError.visibility = View.GONE
+        if (isNetworkConnected()) {
+            idError.visibility = View.GONE
+        } else {
+            idError.visibility = View.VISIBLE
+            parentConstraint.visibility = View.GONE
+        }
         idLoading.visibility = View.VISIBLE
         parentConstraint.visibility = View.GONE
 
@@ -77,7 +89,8 @@ class RandomCategoryActivity : AppCompatActivity() {
             parentConstraint.visibility = View.VISIBLE
             setUI(categoriesItems)
         } else {
-            idError.visibility = View.VISIBLE
+            idErrorNoData.visibility = View.VISIBLE
+            idLoading.visibility = View.GONE
             parentConstraint.visibility = View.GONE
         }
     }

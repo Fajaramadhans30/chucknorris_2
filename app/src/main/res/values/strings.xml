@@ -5,4 +5,7 @@
     <string name="image_for_content_error">Error Content</string>
     <string name="randomCategory">category</string>
     <string name="querySearch">query</string>
+    <string name="jokesValue">jokes_value</string>
+    <string name="jokesCreatedAt">jokes_created_at</string>
+    <string name="no_data">No data</string>
 </resources>
