@@ -1,6 +1,7 @@
 package com.chucknorris.myapplication.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -67,10 +68,10 @@ class RandomCategoryActivity : AppCompatActivity() {
         }
 
         randomCategoryViewModel.getListRandomCategories().observe(this, getCategories)
-
-    }
+        }
 
     private val getCategories = Observer<RandomCategory> { categoriesItems ->
+        Log.d(TAG, "CATEGORIES ITEM : $categoriesItems")
         if (categoriesItems != null) {
             idLoading.visibility = View.GONE
             parentConstraint.visibility = View.VISIBLE
@@ -86,6 +87,7 @@ class RandomCategoryActivity : AppCompatActivity() {
         tvValue.text = categoriesItems.value
         tvCreatedAts.text = categoriesItems.createdAt.toString()
         Log.d(TAG, "setUI: " + categoriesItems.categories)
+
 //        val cal = Calendar.getInstance(Locale.ENGLISH)
 //        cal.timeInMillis = categoriesItems.createdAt!!.toInt() * 1000L
 //        val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
