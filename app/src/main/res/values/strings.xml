@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">vidiotest</string>
+    <string name="search">Search</string>
+    <string name="info_error_response">Please check your connection</string>
+    <string name="image_for_content_error">Error Content</string>
+    <string name="randomCategory">category</string>
+    <string name="querySearch">query</string>
+</resources>
