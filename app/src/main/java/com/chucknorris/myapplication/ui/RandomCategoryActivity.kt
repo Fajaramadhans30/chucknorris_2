@@ -46,7 +46,6 @@ class RandomCategoryActivity : AppCompatActivity() {
         idError.visibility = View.GONE
         idLoading.visibility = View.VISIBLE
         parentConstraint.visibility = View.GONE
-        ivSearchh.visibility = View.GONE
 
         randomCategoryViewModel = RandomCategoryViewModel(
             compositeDisposable,
